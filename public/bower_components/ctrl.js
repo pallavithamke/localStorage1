@@ -24,14 +24,31 @@ app.controller("homectrl",function () {
 });
 app.controller("storagectrl",function ($scope,$localStorage,myservices) {
     $scope.user={};
-    $scope.submitdata=function () {
-        myservices.unarray.push($scope.user)
-        localStorage.setItem('name',JSON.stringify($scope.user.name));
-        localStorage.setItem('email',JSON.stringify($scope.user.email));
 
 
-        
-    }  ;
+    $scope.submitdata=function() {
+        debugger;
+        if($scope.user.check===true){
+
+            localStorage.setItem('name', JSON.stringify($scope.user.name));
+            localStorage.setItem('email', JSON.stringify($scope.user.email));
+            $scope.user={};
+            alert("Yooh, your name and email is saved in the storege.");
+        }
+        else {
+            $scope.user={};
+            alert("your name and email is not saved in the storege.");
+        }
+
+
+    };
+
+    $scope.returnname = localStorage.getItem('name');
+    $scope.returnemail = localStorage.getItem('email');
+    $scope.user.name=JSON.parse($scope.returnname);
+    $scope.user.email=JSON.parse($scope.returnemail);
+
+
 
 
 
